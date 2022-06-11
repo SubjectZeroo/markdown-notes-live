@@ -27,7 +27,7 @@ export default {
     // const notes = computed(() => store.state.notes);
 
     return {
-      notes: computed(() => store.state.notes),
+      notes: computed(() => store.getters.getNotesBySearchTerm),
     };
   },
   components: {

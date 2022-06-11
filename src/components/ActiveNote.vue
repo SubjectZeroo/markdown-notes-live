@@ -13,17 +13,26 @@
         class="p-3 | bg-gray-900 text-white | flex-1"
       />
     </div>
-    <section class="mt-3 | flex justify-end">
-      <a
-        @click="deleteNote"
-        href="#"
-        class="py-1 px-3 mr-3 | text-red-700 rounded-md"
-      >
-        Delete Note</a
-      >
-      <a @click="closeNote" href="#" class="py-1 px-3 | bg-gray-200 rounded-md">
-        Close Note</a
-      >
+    <section class="mt-3 | flex justify-between items-center">
+      <div class="text-sm">
+        Created on {{ noteDate }}, contains {{ noteLenght }} words
+      </div>
+      <div>
+        <a
+          @click="deleteNote"
+          href="#"
+          class="py-1 px-3 mr-3 | text-red-700 rounded-md"
+        >
+          Delete Note</a
+        >
+        <a
+          @click="closeNote"
+          href="#"
+          class="py-1 px-3 | bg-gray-200 rounded-md"
+        >
+          Close Note</a
+        >
+      </div>
     </section>
   </div>
   <div v-else class="h-full| flex justify-center items-center">
@@ -54,7 +63,8 @@ export default {
       });
     const closeNote = () => store.commit("setActiveNote");
     const createNote = () => store.dispatch("createNote");
-    const deleteNote = () => store.commit("deleteNote");
+    // const deleteNote = () => store.commit("deleteNote");
+    const deleteNote = () => store.commit("setDeleting", true);
     const blurNote = (value) => !value.length && deleteNote();
     return {
       activeNote,
@@ -63,6 +73,8 @@ export default {
       createNote,
       deleteNote,
       blurNote,
+      noteDate: computed(() => new Date(activeNote.value.id).toLocaleString()),
+      noteLenght: computed(() => activeNote.value.body.split(/\W+/).length),
     };
   },
   components: { ActiveNoteHtml, ActiveNoteMD },
