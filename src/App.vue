@@ -1,19 +1,36 @@
 <template>
   <DeleteNote v-if="$store.state.deleting" />
   <div
+    v-if="$store.state.user"
     class="container | p-3 my-3 mx-auto | bg-white rounded-xl shadow-2xl | flex"
   >
     <!--Left side-->
     <section class="w-1/4 p-3 mr-3| bg-gray-100">
+      <a
+        @click="$store.dispatch('userLogout')"
+        class="underline text-center block font-bold"
+        href="#"
+        >Logout</a
+      >
       <SearchNote />
       <NoteList />
     </section>
+
+    <!--Right side-->
+    <section class="p-3 | flex-grow">
+      <ActiveNote />
+    </section>
   </div>
 
-  <!--Right side-->
-  <section class="p-3 | flex-grow">
-    <ActiveNote />
-  </section>
+  <div v-else>
+    <a
+      @click="$store.dispatch('userLogin')"
+      class="w-full h-screen | flex justify-center items-center | underline"
+      href="#"
+    >
+      Login please
+    </a>
+  </div>
 </template>
 
 <script>
