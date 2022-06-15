@@ -2,10 +2,22 @@
   <DeleteNote v-if="$store.state.deleting" />
   <div
     v-if="$store.state.user"
-    class="container | p-3 my-3 mx-auto | bg-white rounded-xl shadow-2xl | flex"
+    class="
+      container
+      |
+      p-3
+      my-3
+      mx-auto
+      |
+      bg-white
+      rounded-xl
+      shadow-2xl
+      |
+      md:flex
+    "
   >
     <!--Left side-->
-    <section class="w-1/4 p-3 mr-3| bg-gray-100">
+    <section class="md:w-1/4 p-3 mr-3| bg-gray-100">
       <a
         @click="$store.dispatch('userLogout')"
         class="underline text-center block font-bold"
